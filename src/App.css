@@ -33,12 +33,20 @@
   height: 2.25em;
 }
 
+.dropDown {
+  height: 2.25em;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  
+}
+
 
 
 .headerStyle {
   background: #209cee;
   color: #fff;
   text-align: center;
+  
 }
 
 .discGolfHeader {
@@ -53,7 +61,17 @@
 
 .submitBtn {
   cursor: pointer;
-  position: relative;
+  position : relative;
   left: 70%;
   top: 55%;
+}
+
+.basketImgLeft {
+  height: 40px;
+  padding-right: 10px;
+}
+
+.basketImgRight {
+  height: 40px;
+  padding-left: 10px;
 }
