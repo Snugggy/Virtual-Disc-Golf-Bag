@@ -33,13 +33,12 @@
   height: 2.25em;
 }
 
+
+
 .headerStyle {
   background: #209cee;
   color: #fff;
   text-align: center;
-  
-  
-  
 }
 
 .discGolfHeader {
@@ -50,4 +49,11 @@
   display: flex;
   text-align: center;
   justify-content: space-between;
+}
+
+.submitBtn {
+  cursor: pointer;
+  position: relative;
+  left: 70%;
+  top: 55%;
 }

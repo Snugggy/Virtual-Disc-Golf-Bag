@@ -4,10 +4,10 @@ import './App.css';
 function Disc({ disc, index }) {
   return(
     <div className="disc">
-      { disc.brand }
+      { disc.discBrand }
       { ": " }
-      { disc.text }
-      { "- "}
+      { disc.discName }
+      { " - "}
       { disc.discType}
     </div>
   )
@@ -22,18 +22,27 @@ function Header() {
 }
 
 function DiscForm({ addDisc }) {
-  const [value, setValue] = useState('');
+  const [discBrand, setDiscBrand] = useState('');
+  const [discName, setDiscName] = useState('');
+  const [discType, setDiscType] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
-    if(!value) return;
-    addDisc(value);
-    setValue('');
+    if(!discBrand) return;
+    if(!discName) return;
+    if(!discType) return;
+    addDisc(discBrand, discName, discType);
+    setDiscBrand('');
+    setDiscName('');
+    setDiscType('');
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" className ="input" value={value} placeholder = "Add Disc" onChange={e => setValue(e.target.value)} />
+    <form >
+      <input type="text" className="input" name="discBrand" value={discBrand} placeholder = "Disc Brand" onChange={e => setDiscBrand(e.target.value)} />
+      <input type="text" className="input" name="discName" value={discName} placeholder = "Disc Name" onChange={e => setDiscName(e.target.value)} />
+      <input type="text" className="input" name="discType" value={discType} placeholder = "Disc Type" onChange={e => setDiscType(e.target.value)} />
+      <input type="button" className="submitBtn" value="Submit New Disc" onClick={handleSubmit} /> 
     </form>
   )
 }
@@ -41,33 +50,32 @@ function DiscForm({ addDisc }) {
 function App() {
   const [discs, setDisc] = useState([
     {
-      brand: 'Discraft',
-      text: 'Hades',
+      discBrand: 'Discraft',
+      discName: 'Hades',
       discType: 'Driver',
-      isCompleted: false
     },
     {
-      brand: 'Innova',
-      text: 'Star FL',
+      discBrand: 'Innova',
+      discName: 'Star FL',
       discType: 'Driver',
-      isCompleted: false
     },
     {
-      brand: 'Westside Discs',
-      text: 'Gatekeeper',
+      discBrand: 'Westside Discs',
+      discName: 'Gatekeeper',
       discType: 'Midrange',
-      isCompleted: false
     }
   ]);
 
-  const addDisc = text => {
-    const newDiscs = [...discs, { text }];
+  const addDisc = (discBrand, discName, discType) => {
+    const newDiscs = [...discs, { discBrand, discName, discType }];
     setDisc(newDiscs);
   };
 
   return (
     <div className="app">
-      <Header />
+      <div>
+        <Header />
+      </div>
       <div>
         <h3 className="discGolfHeader">My Disc Golf bag</h3>
       </div>
@@ -75,6 +83,7 @@ function App() {
         {discs.map((disc, index) => (
           <Disc key={index} index={index} disc={disc} />
         ))}
+        <br></br>
         <DiscForm addDisc={addDisc} />
       </div>
     </div>  
