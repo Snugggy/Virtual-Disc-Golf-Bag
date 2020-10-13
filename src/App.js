@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import logo from './disc-golf-basket.jpg'
 
-function Disc({ disc, index }) {
+function Disc({ disc, index, deleteDisc }) {
   return(
     <div className="disc">
       { disc.discBrand }
@@ -12,6 +12,7 @@ function Disc({ disc, index }) {
       { disc.discType}
       {"    "}
       {disc.discWeight}
+      <button className="deleteButton" onClick={() => deleteDisc(index)}>X</button>
     </div>
   )
 }
@@ -28,6 +29,18 @@ function Header() {
   
   )
 }
+
+// function MapFilter({discs, index, deleteDisc}, text) {
+//   return (
+//   discs.filter(disc => disc.discType === text).map((disc, index) => (
+//     <Disc 
+//     key={index} index={index} disc={disc} 
+//     deleteDisc={deleteDisc}
+//     />
+//   ))
+//   )
+  
+// }
 
 
 
@@ -124,6 +137,18 @@ function App() {
       discName: 'Gatekeeper',
       discType: 'Midrange',
       discWeight: '175'
+    },
+    {
+      discBrand: 'Innova',
+      discName: 'Pig',
+      discType: 'Approach Putter',
+      discWeight: '175'
+    },
+    {
+      discBrand: 'Gateway',
+      discName: 'Wizard',
+      discType: 'Putter',
+      discWeight: '175'
     }
 
 
@@ -134,6 +159,14 @@ function App() {
     const newDiscs = [...discs, { discBrand, discName, discType, discWeight }];
     setDisc(newDiscs);
   };
+
+  const deleteDisc = index => {
+    const newDiscs = [...discs];
+    newDiscs.splice(index, 1);
+    setDisc(newDiscs);
+  }
+
+  
 
 
 
@@ -146,9 +179,15 @@ function App() {
         <h3 className="discGolfHeader">My Disc Golf bag</h3>
       </div>
       <div className="disc-list">
-        {discs.map((disc, index) => (
-          <Disc key={index} index={index} disc={disc} />
-        ))}
+        <div>
+          {discs.map((disc, index) => (
+            <Disc 
+            key={index} index={index} disc={disc} 
+            deleteDisc={deleteDisc}
+            />
+          ))}
+        </div>
+          
         <br></br>
         <DiscForm addDisc={addDisc} />
         </div> 
